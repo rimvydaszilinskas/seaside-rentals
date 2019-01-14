@@ -1,10 +1,12 @@
 const router = require("express").Router();
+const authorization = require("./authorization.js");
 
-router.get("/", (req, res) => {
-    res.send("Hello");
-});
+module.exports = (config) => {
+    router.get("/", (req, res) => {
+        res.render("index");
+    });
+    
+    router.use("/auth", authorization(config));
 
-router.get("/login", (req, res) => {
-
-});
-module.exports = router;
+    return router;
+};
