@@ -1,2 +1,4 @@
 node_modules/
 # ignore all the node_modules directory
+
+server/config/
