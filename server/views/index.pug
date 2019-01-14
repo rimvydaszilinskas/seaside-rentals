@@ -1,167 +1,108 @@
-doctype html
-html
-  head
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
-    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO', crossorigin='anonymous')
-    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.3.1/css/all.css', integrity='sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU', crossorigin='anonymous')
-    title Title goes here
-    link(rel='stylesheet', href='/css/style.css', type='text/css')
-  body
-    header
-      nav#navigation.navbar.navbar-expand-md.navbar-light.bg-light.fixed-top
+extends layout/layout
+block mainContent
+  .container-fluid
+    #mapRow.row(style='position: relative')
+      #map
+      #searchOnMap
         .container
-          a.navbar-brand(href='#') LOGO!
-          #navigationLinks.collapse.navbar-collapse
-            ul.navbar-nav.mr-auto
-              li.nav-item.active
-                a.nav-link(href='#') Pagrindinis
-              li.nav-item
-                a.nav-link(href='#') Skelbimai
-              li.nav-item
-                a.nav-link(href='#') Nuoroda
-              li.nav-item
-                a.nav-link(href='#') Nuoroda
-            a.btn.btn-success(href='#') Naujas skelbimas
-      nav#smallNavigation.navbar.navbar-expand-md.navbar-light.bg-light.fixed-top
-        .container
-          a.navbar-brand(href='#') LOGO!
-          button.navbar-toggler(type='button', data-toggle='collapse', data-target='#smallNavigationLinks', aria-controls='smallNavigationLinks', aria-expanded='false', aria-label='Toggle navigation')
-            span.navbar-toggler-icon
-          #smallNavigationLinks.collapse.navbar-collapse
-            ul.navbar-nav.mr-auto
-              li.nav-item.active
-                a.nav-link(href='#') Pagrindinis
-              li.nav-item
-                a.nav-link(href='#') Skelbimai
-              li.nav-item
-                a.nav-link(href='#') Nuoroda
-              li.nav-item
-                a.nav-link(href='#') Nuoroda
-            a.btn.btn-success(href='#') Naujas skelbimas
-    main
-      .container-fluid
-        #mapRow.row(style='position: relative')
-          #map
-          #searchOnMap
-            .container
-              form#searchOnMapForm
-                .form-row
-                  .col
-                    label(for='typeSelect') Būsto tipas
-                    select#typeSelect.form-control.form-control-sm
-                      option Butas
-                      option Kambarys
-                      option Namas
-                  .col
-                    label(for='locationSelect') Vieta
-                    select#typeSelect.form-control.form-control-sm
-                      option
-                      option Palanga
-                      option Sventoji
-                .form-group.sliderContainer
-                  label(for='priceRange')
-                    | Kaina iki: 
-                    span#maxPrice
-                    |  EUR.
-                  input#priceRange.slider(type='range', min='50', max='500', value='150', step='10')
-                .form-group.sliderContainer
-                  label(for='minimumCapacity')
-                    | Vietų skaičius >
-                    span#minCapacity
-                  input#minimumCapacity.slider(type='range', min='1', max='10', value='3')
-                button.btn.btn-success Ieškoti
-                a(href='#') Išplėstinė paieška
-      .container.marginTop.latestContainer
-        .row
-          .col-md-12.rowTitle
-            h3 Populiariausi
-        .row.cardHolder
-          .card(style='width: 18rem;')
-            img.card-img-top(src='property.jpg', alt='Property image')
-            .card-body
-              h5.card-title Nemuno g. 5
-              p Kambarys, nuosava virtuve, dusas
-              a.btn.btn-success(href='#') Apžiūrėti
-          .card(style='width: 18rem;')
-            img.card-img-top(src='property.jpg', alt='Property image')
-            .card-body
-              h5.card-title Nemuno g. 5
-              p Kambarys, nuosava virtuve, dusas
-              a.btn.btn-success(href='#') Apžiūrėti
-          .card(style='width: 18rem;')
-            img.card-img-top(src='property.jpg', alt='Property image')
-            .card-body
-              h5.card-title Nemuno g. 5
-              p Kambarys, nuosava virtuve, dusas
-              a.btn.btn-success(href='#') Apžiūrėti
-      .container.marginTop.latestContainer
-        .row
-          .col-md-12.rowTitle
-            h3 Naujausi skelbimai
-        .row.cardHolder
-          .card(style='width: 18rem;')
-            img.card-img-top(src='property.jpg', alt='Property image')
-            .card-body
-              h5.card-title Nemuno g. 5
-              p Kambarys, nuosava virtuve, dusas
-              a.btn.btn-success(href='#') Apžiūrėti
-          .card(style='width: 18rem;')
-            img.card-img-top(src='property.jpg', alt='Property image')
-            .card-body
-              h5.card-title Nemuno g. 5
-              p Kambarys, nuosava virtuve, dusas
-              a.btn.btn-success(href='#') Apžiūrėti
-          .card(style='width: 18rem;')
-            img.card-img-top(src='property.jpg', alt='Property image')
-            .card-body
-              h5.card-title Nemuno g. 5
-              p Kambarys, nuosava virtuve, dusas
-              a.btn.btn-success(href='#') Apžiūrėti
-          .card(style='width: 18rem;')
-            img.card-img-top(src='property.jpg', alt='Property image')
-            .card-body
-              h5.card-title Nemuno g. 5
-              p Kambarys, nuosava virtuve, dusas
-              a.btn.btn-success(href='#') Apžiūrėti
-      .container-fluid.mainAdHolder.marginTop
-        h3 Vieta jūsų reklamai
-      .container.marginTop.infoNews
-        .row
-          .col-md-3
-            h5 Title
-            p
-              | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorpe.
-          .col-md-3
-            h5 Title
-            p
-              | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorpe.
-          .col-md-3
-            h5 Title
-            p
-              | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorpe.
-          .col-md-3
-            h5 Title
-            p
-              | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorpe.
-    footer
-      .container
-        .col-md-4
-          | © Copyright @Tomas 
-          a(href='http://rimvydas.site', target='_blank')
-            i.fa.fa-wrench(aria-hidden='true')
-            |  Developer
-    script.
-      // enter manually the center of the map
-      mapCenter = {
-      latitude: -33.92,
-      longitude: 151.25
-      }
-    script(type='text/javascript', src='mapScript.js')
-    // Google maps api
-    script(src='http://maps.google.com/maps/api/js?key=AIzaSyD3CSjb_UimJpghFMB9iStDB97EGQ6CISo&callback=initMap', type='text/javascript')
-    script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js', integrity='sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49', crossorigin='anonymous')
-    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', integrity='sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy', crossorigin='anonymous')
-    script(type='text/javascript', src='script.js')
-    script(type='text/javascript', src='scriptJQuery.js')
+          form#searchOnMapForm
+            .form-row
+              .col
+                label(for='typeSelect') Būsto tipas
+                select#typeSelect.form-control.form-control-sm
+                  option Butas
+                  option Kambarys
+                  option Namas
+              .col
+                label(for='locationSelect') Vieta
+                select#typeSelect.form-control.form-control-sm
+                  option
+                  option Palanga
+                  option Sventoji
+            .form-group.sliderContainer
+              label(for='priceRange')
+                | Kaina iki: 
+                span#maxPrice
+                |  EUR.
+              input#priceRange.slider(type='range', min='50', max='500', value='150', step='10')
+            .form-group.sliderContainer
+              label(for='minimumCapacity')
+                | Vietų skaičius >
+                span#minCapacity
+              input#minimumCapacity.slider(type='range', min='1', max='10', value='3')
+            button.btn.btn-success Ieškoti
+            a(href='#') Išplėstinė paieška
+  .container.marginTop.latestContainer
+    .row
+      .col-md-12.rowTitle
+        h3 Populiariausi
+    .row.cardHolder
+      .card(style='width: 18rem;')
+        img.card-img-top(src='/images/property.jpg', alt='Property image')
+        .card-body
+          h5.card-title Nemuno g. 5
+          p Kambarys, nuosava virtuve, dusas
+          a.btn.btn-success(href='#') Apžiūrėti
+      .card(style='width: 18rem;')
+        img.card-img-top(src='/images/property.jpg', alt='Property image')
+        .card-body
+          h5.card-title Nemuno g. 5
+          p Kambarys, nuosava virtuve, dusas
+          a.btn.btn-success(href='#') Apžiūrėti
+      .card(style='width: 18rem;')
+        img.card-img-top(src='/images/property.jpg', alt='Property image')
+        .card-body
+          h5.card-title Nemuno g. 5
+          p Kambarys, nuosava virtuve, dusas
+          a.btn.btn-success(href='#') Apžiūrėti
+  .container.marginTop.latestContainer
+    .row
+      .col-md-12.rowTitle
+        h3 Naujausi skelbimai
+    .row.cardHolder
+      .card(style='width: 18rem;')
+        img.card-img-top(src='/images/property.jpg', alt='Property image')
+        .card-body
+          h5.card-title Nemuno g. 5
+          p Kambarys, nuosava virtuve, dusas
+          a.btn.btn-success(href='#') Apžiūrėti
+      .card(style='width: 18rem;')
+        img.card-img-top(src='/images/property.jpg', alt='Property image')
+        .card-body
+          h5.card-title Nemuno g. 5
+          p Kambarys, nuosava virtuve, dusas
+          a.btn.btn-success(href='#') Apžiūrėti
+      .card(style='width: 18rem;')
+        img.card-img-top(src='/images/property.jpg', alt='Property image')
+        .card-body
+          h5.card-title Nemuno g. 5
+          p Kambarys, nuosava virtuve, dusas
+          a.btn.btn-success(href='#') Apžiūrėti
+      .card(style='width: 18rem;')
+        img.card-img-top(src='/images/property.jpg', alt='Property image')
+        .card-body
+          h5.card-title Nemuno g. 5
+          p Kambarys, nuosava virtuve, dusas
+          a.btn.btn-success(href='#') Apžiūrėti
+  .container-fluid.mainAdHolder.marginTop
+    h3 Vieta jūsų reklamai
+  .container.marginTop.infoNews
+    .row
+      .col-md-3
+        h5 Title
+        p
+          | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorpe.
+      .col-md-3
+        h5 Title
+        p
+          | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorpe.
+      .col-md-3
+        h5 Title
+        p
+          | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorpe.
+      .col-md-3
+        h5 Title
+        p
+          | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorpe.
+
+
