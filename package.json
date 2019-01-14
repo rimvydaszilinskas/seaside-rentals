@@ -1,0 +1,27 @@
+{
+  "name": "seaside-rentals",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rimvydaszilinskas/seaside-rentals.git"
+  },
+  "author": "Rimvydas Zilinskas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rimvydaszilinskas/seaside-rentals/issues"
+  },
+  "homepage": "https://github.com/rimvydaszilinskas/seaside-rentals#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "mysql2": "^1.6.4",
+    "sequelize": "^4.42.0"
+  }
+}
