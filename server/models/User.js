@@ -15,15 +15,15 @@ module.exports = (sequelize, Sequelize) => {
         },
         password: {
             type: Sequelize.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         firstname: {
             type: Sequelize.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         lastname: {
             type: Sequelize.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         phone: {
             type: Sequelize.STRING,

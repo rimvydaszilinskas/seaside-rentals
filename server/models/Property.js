@@ -23,7 +23,7 @@ module.exports = (sequelize, Sequelize) => {
             unique: false,
             allowNull: false,
             validate: {
-                isIn: [["kambarys", "butas"]]
+                isIn: [["kambarys", "butas", "namas"]]
             }
         },
         roomcount: {
