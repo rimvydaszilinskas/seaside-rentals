@@ -59,24 +59,6 @@ module.exports = (passport, User, Admin) => {
         });
     }));
 
-    // passport.use("local-admin-login", new LocalStrategy({
-    //     usernameField: "username",
-    //     passwordField: "password",
-    //     passReqToCallback: true
-    // }, (req, username, password, done) => {
-    //     var isValidPassword = (password, hashedPass) => {
-    //         return bcrypt.compareSync(password, hashedPass);
-    //     };
-
-    //     Admin.findOne({
-    //         where: { username: username }
-    //     }).then((admin) => {
-    //         if(!admin || !isValidPassword(password, admin.password))
-    //             return done(null, false, {message: "Wrong credentials"});
-    //         return done(null, admin.get());
-    //     })
-    // }));
-
     passport.serializeUser((user, done) => {
         done(null, user.id);
     });
