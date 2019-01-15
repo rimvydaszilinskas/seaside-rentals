@@ -1,0 +1,20 @@
+extends layout/layout
+block mainContent
+    .container
+        .row
+            .col-md-6.offset-md-3
+                h2
+                    | Prisijungimas
+                form(method="POST", action="/auth/login")
+                    .form-group
+                        label(for="email") El. Paštas
+                        input.form-control#email(name="email", type="email", placeholder="El. pastas")
+                    .form-group                        
+                        label(for="password") Slaptažodis
+                        input.form-control#password(name="password", type="password", placeholder="Slaptažodis")
+                    button.btn.btn-success.login-btn Prisijungti
+                    a(href="/")
+                        | Pamiršau slaptažodį
+                    br
+                    a(href="/auth/register")
+                        | Nauja paskyra

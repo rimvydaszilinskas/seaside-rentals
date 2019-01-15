@@ -11,10 +11,7 @@ const app = express();
 var configs = config[app.get("env")];
 
 // Get database objects
-const models = require("./models/sequelize.js");
-
-if(app.get("env") === "development")
-    models.sequelize.sync().then(() => console.log("Models synchronized"));
+const {User} = require("./models/sequelize.js")(app.get("env"));
 
 // set up body parser
 app.use(bodyParser.json());
@@ -36,8 +33,8 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-// load passport configuration file
-require("./configuration/passport-config.js")(passport, models.User, models.Admin);
+// load passport configuration
+require("./configuration/passport-config.js")(passport, User);
 
 // set up routing
 const routers = require("./routers");

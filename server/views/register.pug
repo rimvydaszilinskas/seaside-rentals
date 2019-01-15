@@ -1,0 +1,26 @@
+extends layout/layout
+block mainContent
+    .container
+        .row
+            .col-md-6.offset-md-3
+                h2
+                    | Registracija
+                a(href="/auth/login")
+                        | Turiu paskyrą
+                form(method="POST", action="/auth/register")
+                    .form-group
+                        label(for="email") El. Paštas
+                        input.form-control#email(name="email", type="email", placeholder="El. pastas")
+                        label(for="password") Slaptažodis
+                        input.form-control#password(name="password", type="password", placeholder="Slaptazodis")
+                        label(for="password-repeat") Pakartokite slaptažodį
+                        input.form-control#password-repeat(name="password-repeat", type="password", placeholder="Pakartokite slaptažodį")
+                    .form-group
+                        label(for="firstname") Vardas
+                        input.form-control#firstname(name="firstname", type="text")
+                        label(for="firstname") Pavardė
+                        input.form-control#lastname(name="lastname", type="text")
+                        label(for="phone") Tel. numeris
+                        input.form-control#phone(name="phone", type="text")
+                    button.btn.btn-success.login-btn Prisijungti
+                    

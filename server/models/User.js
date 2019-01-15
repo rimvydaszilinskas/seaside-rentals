@@ -8,20 +8,26 @@ module.exports = (sequelize, Sequelize) => {
         email: {
             type: Sequelize.STRING,
             unique: true,
-            alowNull: false,
+            allowNull: false,
             validate: {
-                isEmail:true
-            },
+                isEmail: true
+            }
         },
         password: {
             type: Sequelize.STRING,
-            alowNull: false
+            allowNull: false,
         },
         firstname: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
         },
         lastname: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        phone: {
+            type: Sequelize.STRING,
+            allowNull: true
         }
     });
 };

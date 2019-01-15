@@ -1,34 +1,24 @@
-var fs        = require('fs');
-var path      = require('path');
-var Sequelize = require('sequelize');
-var basename  = path.basename(__filename);
-var env       = process.env.NODE_ENV || 'development';
-var config    = require(path.join(__dirname, '../config/config.js'))[env];
-var db        = {};
+const Sequelize = require("sequelize");
 
-if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  var sequelize = new Sequelize(config.database, config.username, config.password, config);
+const UserModel = require("./User");
+const PropertyModel = require("./Property");
+
+module.exports = (env) => {
+  const config = require("../config/config")[env];
+
+  // initialize connection
+  const sequelize = new Sequelize(config);
+
+  // create object models
+  const User = UserModel(sequelize, Sequelize);
+  const Property = PropertyModel(sequelize, Sequelize);
+
+  Property.belongsTo(User, {foreignKey: {allowNull: false}, onDelete: 'CASCADE'});
+
+  // sequelize.sync({force: true})
+  //   .then(() => {
+  //     console.log("database synchronized");
+  //   });
+
+  return {User, Property};
 }
-
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })
-  .forEach(file => {
-    var model = sequelize['import'](path.join(__dirname, file));
-    db[model.name] = model;
-  });
-
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
-
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-module.exports = db;

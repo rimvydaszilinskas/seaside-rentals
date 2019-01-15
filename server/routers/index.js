@@ -6,7 +6,7 @@ module.exports = (config, passport) => {
         res.render("index");
     });
     
-    router.use("/auth", authorization(config));
+    router.use("/auth", authorization(config, passport));
 
     return router;
 };

@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt-nodejs");
 
-module.exports = (passport, User, Admin) => {
+module.exports = (passport, User) => {
     var LocalStrategy = require("passport-local").Strategy;
 
     passport.use("local-signup", new LocalStrategy({
@@ -9,7 +9,7 @@ module.exports = (passport, User, Admin) => {
         passReqToCallback: true
     }, (req, email, password, done) => {
         var generateHashedPassword = (password) => {
-            return bcrypt(password, bcrypt.genSaltSync(8), null);
+            return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
         };
 
         User.findOne({
@@ -23,9 +23,10 @@ module.exports = (passport, User, Admin) => {
 
             var userToPush = {
                 email: email,
-                password: password,
+                password: hashedPassword,
                 firstname: req.body.firstname,
-                lastname: req.body.lastname
+                lastname: req.body.lastname,
+                phone: req.body.phone
             };
 
             User.create(userToPush).then((user, created) => {
