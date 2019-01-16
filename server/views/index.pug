@@ -22,16 +22,16 @@ block mainContent
             .form-group.sliderContainer
               label(for='priceRange')
                 | Kaina iki: 
-                span#maxPrice
+                span#maxPrice 150
                 |  EUR.
               input#priceRange.slider(type='range', min='50', max='500', value='150', step='10')
             .form-group.sliderContainer
               label(for='minimumCapacity')
-                | Vietų skaičius >
-                span#minCapacity
-              input#minimumCapacity.slider(type='range', min='1', max='10', value='3')
+                | Lovų skaičius >
+                span#minBeds 3
+              input#minimumBeds.slider(type='range', min='1', max='10', value='3')
             button.btn.btn-success Ieškoti
-            a(href='#') Išplėstinė paieška
+            a(href='/properties/') Išplėstinė paieška
   .container.marginTop.latestContainer
     .row
       .col-md-12.rowTitle

@@ -1,1 +1,47 @@
 extends layout/layout
+block mainContent
+    form
+        .container.marginTop
+            .row
+                .col
+                    .form-group
+                    label(for='type') Busto tipas
+                    select#type.form-control
+                        option(value='*') 
+                        option(value='butas') Butas
+                        option(value='namas') Namas
+                        option(value='kambarys') Kambarys
+                .col
+                    .form-group
+                    label(for='location') Vietove
+                    select#location.form-control
+                        option Visos vietoves
+                        option Nida
+                        option Juodkrante
+                        option Klaipeda
+                        option Palanga
+                        option Sventoji
+            .row
+                .col
+                    .form-group.sliderContainer
+                        label(for='minimumRoom')
+                            | Vietų skaičius >
+                            span#minRoom
+                        input#minimumRoom.slider(type='range', min='1', max='10', value='3')
+                .col
+                    .form-group.sliderContainer
+                        label(for='priceRange')
+                            | Kaina iki 
+                            span#maxPrice
+                            |  EUR. per parą
+                        input#priceRange.slider(type='range', min='50', max='500', value='150', step='10')
+            .row
+                .col
+                    .form-group.sliderContainer
+                        label(for='minimumBeds')
+                            | Lovu skaičius >
+                            span#minBeds 2
+                        input#minimumBeds.slider(type='range', min='1', max='10', value='2')
+            button.btn.btn-success(type='submit') 
+                | Ieškoti (
+                span#resultCount=`1)`

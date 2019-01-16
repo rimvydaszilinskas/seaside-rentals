@@ -7,6 +7,11 @@ module.exports = (config) => {
     let cloudinary = config.cloudinary;
     let fileParser = config.fileParser;
     
+    // directs to the search
+    router.get("/", (req, res) => {
+        res.render("search", {search: true});
+    });
+
     // returns appropriate view for the create request
     router.get("/create", (req, res) => {
         if(!req.isAuthenticated())
@@ -32,6 +37,7 @@ module.exports = (config) => {
                 price: req.body.price,
                 propertyType: req.body.propertyType,
                 roomcount: req.body.roomCount,
+                bedcount: req.body.bedCount,
                 description: req.body.description,
                 userId: req.user.id
             }).then((resp) => {
@@ -45,6 +51,7 @@ module.exports = (config) => {
                 price: req.body.price,
                 propertyType: req.body.propertyType,
                 roomcount: req.body.roomCount,
+                bedcount: req.body.bedCount,
                 description: req.body.description,
                 user: {
                     email: req.body.email,
@@ -118,7 +125,8 @@ module.exports = (config) => {
             res.send(err);
         });
     });
-
+    
+    //display a specific property
     router.get("/get/:id", (req, res) => {
         var propertyId = req.param("id");
 
@@ -128,6 +136,8 @@ module.exports = (config) => {
             },
             include: [{model: User, as: "user"}, {model: Image, as: "images"}]
         }).then((result) => {
+            if(!result)
+                return res.json({message: "No item found!"});
             result.getDate(result.createdAt);
             // return res.json(result);
             return res.render("properties/display", {property: result, hasMap: true, google_api_key: config.google.maps.api, activeUser: req.user});

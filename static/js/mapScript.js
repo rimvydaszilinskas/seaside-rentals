@@ -1,6 +1,7 @@
 //global variables
 var map;
 var infowindow;
+
 mapCenter = {
   latitude: 54.9255234,
   longitude: 23.9408199
@@ -15,19 +16,7 @@ function initMap() {
   });
 
   infowindow = new google.maps.InfoWindow();
-  addMarker({id: 1, name: "Nice one", latitude: -33.890542, longitude: 151.274856, link: "http://google.com"})
-}
-
-function initLocationMap() {
-  map = new google.maps.Map(document.getElementById('locationMap'), {
-    zoom: 10,
-    center: new google.maps.LatLng(mapCenter.latitude, mapCenter.longitude),
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    disableDefaultUI: true
-  });
-
-  infowindow = new google.maps.InfoWindow();
-  addMarker({id: 1, name: "Nice one", latitude: -33.890542, longitude: 151.274856, link: "http://google.com"})
+  // addMarker({id: 1, name: "Nice one", latitude: -33.890542, longitude: 151.274856, link: "http://google.com"})
 }
 
 function clearMap() {
@@ -35,26 +24,42 @@ function clearMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
     center: new google.maps.LatLng(mapCenter.latitude, mapCenter.longitude),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    disableDefaultUI: true
   });
 
   infowindow = new google.maps.InfoWindow();
 }
 
+function reinitMap(config){
+  map = new google.maps.Map(document.getElementById('mao'), {
+    zoom: config.zoom ? config.zoom : 10,
+    center: new google.maps.LatLng(config.latitude ? config.latitude : mapCenter.latitude, 
+                                  config.longitude ? config.longitude : mapCenter.longitude),
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    disableDefaultUI: true
+  });
+
+  if(config.markers)
+    config.markers.forEach(marker => {
+      addMarker(marker);
+    });
+}
+
 function addMarker(location) {
   // location should come in the following format:
-  // {id: ?, name: ?, latitude: ?, longitude: ?, link: ?}
+  // {id: ?, address: ?, price: ?,latitude: ?, longitude: ?}
   var marker, i;
 
   marker = new google.maps.Marker({
     position: new google.maps.LatLng(location.latitude, location.longitude),
-    title: "Fun times",
+    title: location.title,
     map: map
   });
 
   google.maps.event.addListener(marker, 'click', (function(marker, i) {
     return function() {
-      infowindow.setContent(location.name + "<br/><a href='" + location.link + "'>Link to property</a>");
+      infowindow.setContent(`${location.address}<br/>${location.price}<br/><a href='/property/get/${location.id}'>Link to property</a>`);
       infowindow.open(map, marker);
     }
   })(marker, i));
