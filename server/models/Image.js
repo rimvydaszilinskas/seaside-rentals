@@ -6,11 +6,12 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         url: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
             allowNull: false
         },
         primary: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.BOOLEAN,
+            allowNull: true
         }
     })
 }

@@ -22,10 +22,11 @@ module.exports = (env) => {
   const PropertyUser = Property.belongsTo(User, {foreignKey: {allowNull: true}, as: "user",  onDelete: 'CASCADE'});
   const ImageProperty = Property.hasMany(Image, {onDelete: "CASCADE"});
 
-  sequelize.sync({force: true})
-    .then(() => {
-      console.log("database synchronized");
-    });
+  if(env === "development")
+    sequelize.sync({force: true})
+      .then(() => {
+        console.log("database synchronized");
+      });
   
   models.User = User;
   models.Property = Property;

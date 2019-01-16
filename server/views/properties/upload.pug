@@ -1,0 +1,20 @@
+extends ../layout/layout
+block mainContent
+    .continer
+        .row
+            .col-md-6.offset-md-3
+                form(action='/properties/upload', method='POST', enctype="multipart/form-data")
+                    h2=`${property.address}, ${property.city}`
+                    input(value=property.id, name='id', disabled='', hidden='')
+                    .form-group.file-input
+                        label.btn.btn-success.btn-file
+                            | Browse 
+                            input.form-control#image(type='file', name="image", style='display: none;')
+                        span.text No file selected
+                    .form-group.file-input
+                        label.btn.btn-success.btn-file
+                            | Browse 
+                            input.form-control#image(type='file', name="imager", style='display: none;')
+                        span.text No file selected
+                    button.btn.btn-success.btn-margin(type='submit') Siųsti
+                    a.btn.btn-success.btn-margin(href='/') Praleisti

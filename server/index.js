@@ -3,11 +3,23 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const path = require("path");
+const cloudinary = require("cloudinary");
+const fileParser = require("connect-multiparty")();
 
 const app = express();
 
 // get the configuration
 const configs = require("./config")[app.get("env")];
+
+// set up cloudinary account
+cloudinary.config({
+    cloud_name: configs.cloudinary.cloud_name,
+    api_key: configs.cloudinary.api_key,
+    api_secret: configs.cloudinary.api_secret
+});
+
+configs.cloudinary = cloudinary;
+configs.fileParser = fileParser;
 
 // Get database objects
 const models = require("./models/sequelize.js")(app.get("env"));

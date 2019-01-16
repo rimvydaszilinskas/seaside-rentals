@@ -6,43 +6,42 @@ block mainContent
                 h2
                     | Naujas skelbimas
                 form(method='POST', action='/properties/create')
+                    h4
+                        | Pagrindinė informacija
                     .form-group
-                        h4
-                            | Pagrindinė informacija
+                        label(for='address') Adresas
+                        input.form-control#address(name='address', type='text', placeholder='Pavyzdzio g. 1')
+                    .form-group
+                        label(for='city') Miestas
+                        input.form-control#city(name='city', type='text', placeholder='Kaunas')
+                    .form-group
+                        label(for='price') Kaina
+                        input.form-control#price(name='price', type='text', placeholder='200')
+                    .form-group
+                        label(for='propertyType') Busto tipas
+                        select.form-control#propertyType(name='propertyType')
+                            option(value='*')
+                            option(value='kambarys') Kambarys
+                            option(value='butas') Butas
+                            option(value='namas') Namas
+                    .form-group
+                        label(for='roomCount') Kambarių skaičius
+                        input.form-control#roomCount(name='roomCount', type='number', min=0, max=5)
+                    if user
                         .form-group
-                            label(for='address') Adresas
-                            input.form-control#address(name='address', type='text', placeholder='Pavyzdzio g. 1')
+                            label(for='renter') Nuomotojas
+                            input.form-control#renter(value=`${user.firstname} ${user.lastname}`, disabled='')
+                            label(for='phone') Telefono numeris
+                            input.form-control#phone(value=`${user.phone}` disabled='')
+                    else 
                         .form-group
-                            label(for='city') Miestas
-                            input.form-control#city(name='city', type='text', placeholder='Kaunas')
-                        .form-group
-                            label(for='price') Kaina
-                            input.form-control#price(name='price', type='text', placeholder='200')
-                        .form-group
-                            label(for='propertyType') Busto tipas
-                            select.form-control#propertyType(name='propertyType')
-                                option(value='*')
-                                option(value='kambarys') Kambarys
-                                option(value='butas') Butas
-                                option(value='namas') Namas
-                        .form-group
-                            label(for='roomCount') Kambarių skaičius
-                            input.form-control#roomCount(name='roomCount', type='number', min=0, max=5)
-                        if user
-                            .form-group
-                                label(for='renter') Nuomotojas
-                                input.form-control#renter(value=`${user.firstname} ${user.lastname}`, disabled='')
-                                label(for='phone') Telefono numeris
-                                input.form-control#phone(value=`${user.phone}` disabled='')
-                        else 
-                            .form-group
-                                label(for='firstname') Vardas
-                                input.form-control#firstname(type='text', name='firstname')
-                                label(for='lastname') Pavardė
-                                input.form-control#lastname(type='text', name='lastname')
-                                label(for='phone') Telefono numeris
-                                input.form-control#phone(type='text', name='phone')
-                                label(for='email') El. paštas
-                                input.form-control#email(type='email', name='email')
-                        br
-                        button.btn.btn-success.create-btn Siųsti
+                            label(for='firstname') Vardas
+                            input.form-control#firstname(type='text', name='firstname')
+                            label(for='lastname') Pavardė
+                            input.form-control#lastname(type='text', name='lastname')
+                            label(for='phone') Telefono numeris
+                            input.form-control#phone(type='text', name='phone')
+                            label(for='email') El. paštas
+                            input.form-control#email(type='email', name='email')
+                    br
+                    button.btn.btn-success.create-btn Siųsti
