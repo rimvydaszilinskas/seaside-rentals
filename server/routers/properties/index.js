@@ -81,5 +81,8 @@ module.exports = (config) => {
         });
     });
 
+    router.get("/results", (req, res) => {
+        res.render("properties/results");
+    });
     return router;
 };
