@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const authorization = require("./authorization.js");
 const properties = require("./properties");
+const api = require("./api");
 
 module.exports = (config, passport) => {
     router.get("/", (req, res) => {
@@ -9,5 +10,6 @@ module.exports = (config, passport) => {
     
     router.use("/auth", authorization(config, passport));
     router.use("/properties", properties(config));
+    router.use("/api", api(config));
     return router;
 };

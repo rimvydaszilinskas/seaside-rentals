@@ -2,19 +2,9 @@
 var map;
 var infowindow;
 mapCenter = {
-  latitude: -33.92,
-  longitude: 151.25
-}
-
-var locationJSON = '{ ' +
-  '"id": "1", ' +
-  '"name": "Bullshit paradise", ' +
-  '"latitude": "-33.890542", ' +
-  '"longitude": "151.274856", ' +
-  '"link": "http://google.com" ' +
-'}';
-
-// var location = JSON.parse(locationJSON);
+  latitude: 54.9255234,
+  longitude: 23.9408199
+};
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
