@@ -1,6 +1,10 @@
 //global variables
 var map;
 var infowindow;
+mapCenter = {
+  latitude: -33.92,
+  longitude: 151.25
+}
 
 var locationJSON = '{ ' +
   '"id": "1", ' +

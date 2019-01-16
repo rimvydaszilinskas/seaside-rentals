@@ -22,7 +22,7 @@ configs.cloudinary = cloudinary;
 configs.fileParser = fileParser;
 
 // Get database objects
-const models = require("./models/sequelize.js")(app.get("env"));
+const models = require("./models/sequelize.js")(app.get("env"), configs.database.sync);
 configs.models = models;
 
 // set up body parser

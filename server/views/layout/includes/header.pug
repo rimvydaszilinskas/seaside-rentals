@@ -10,9 +10,13 @@ header
                 a.nav-link(href='#') Skelbimai
               li.nav-item
                 a.nav-link(href='#') Nuoroda
-              li.nav-item
-                a.nav-link(href='/auth/login') Prisijungimas
-            a.btn.btn-success(href='#') Naujas skelbimas
+              if !activeUser
+                li.nav-item
+                  a.nav-link(href='/auth/login') Prisijungimas
+            a.btn.btn-success(href='/properties/create') Naujas skelbimas
+            if activeUser
+              a.nav-link(href='#')=`Prisijunges kaip ${activeUser.firstname}`
+
       nav#smallNavigation.navbar.navbar-expand-md.navbar-light.bg-light.fixed-top
         .container
           a.navbar-brand(href='#') LOGO!
@@ -26,6 +30,9 @@ header
                 a.nav-link(href='#') Skelbimai
               li.nav-item
                 a.nav-link(href='#') Nuoroda
-              li.nav-item
-                a.nav-link(href='#') Nuoroda
+              if !activeUser
+                li.nav-item
+                  a.nav-link(href='/auth/login') Prisijungimas
             a.btn.btn-success(href='#') Naujas skelbimas
+            if activeUser
+              a.nav-link(href='#')=`Prisijunges kaip ${activeUser.firstname}`

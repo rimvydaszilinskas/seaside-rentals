@@ -27,6 +27,9 @@ block mainContent
                     .form-group
                         label(for='roomCount') Kambarių skaičius
                         input.form-control#roomCount(name='roomCount', type='number', min=0, max=5)
+                    .form-group
+                        label(for='description') Aprašymas
+                        textarea.form-control#description(name='description')
                     if user
                         .form-group
                             label(for='renter') Nuomotojas

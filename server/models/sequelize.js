@@ -4,7 +4,7 @@ const UserModel = require("./User");
 const PropertyModel = require("./Property");
 const ImageModel = require("./Image");
 
-module.exports = (env) => {
+module.exports = (env, sync) => {
   const config = require("../config/mysql_config")[env];
 
   // initialize connection
@@ -22,7 +22,7 @@ module.exports = (env) => {
   const PropertyUser = Property.belongsTo(User, {foreignKey: {allowNull: true}, as: "user",  onDelete: 'CASCADE'});
   const ImageProperty = Property.hasMany(Image, {onDelete: "CASCADE"});
 
-  if(env === "development")
+  if(env === "development" && sync)
     sequelize.sync({force: true})
       .then(() => {
         console.log("database synchronized");

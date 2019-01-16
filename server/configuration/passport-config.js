@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt-nodejs");
+const Op = require("sequelize").Op;
 
 module.exports = (passport, User) => {
     var LocalStrategy = require("passport-local").Strategy;
@@ -14,7 +15,10 @@ module.exports = (passport, User) => {
 
         User.findOne({
             where: {
-                email: email
+                email: email,
+                password: {
+                    [Op.ne] : null
+                }
             }
         }).then(user => {
             if(user){
@@ -50,7 +54,12 @@ module.exports = (passport, User) => {
         };
 
         User.findOne({
-            where: { email: email}
+            where: { 
+                email: email,
+                password: {
+                    [Op.ne] : null
+                }
+            }
         }).then((user) => {
             if(!user)
                 return done(null, false, { message: "Email does not exsist" });

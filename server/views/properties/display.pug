@@ -1,0 +1,83 @@
+extends ../layout/layout
+block mainContent
+    .container
+        .row
+            .col
+                h2=`Nuomuojamas ${property.propertyType}` 
+                //- p.mainDetails=`${property.propertyType}`
+                p.extraDetails
+                    span.posted=`Paskelbta ${property.getDate(property.createdAt)}`
+        .row
+            .col#advertisement
+                h3(style='color:white') Vieta reklamai
+        .row.marginTop
+            .col
+                #carouselExampleIndicators.carousel.slide(data-ride='carousel')
+                    ol.carousel-indicators
+                        each image, index in property.images
+                            li.active(data-target='#carouselExampleIndicators', data-slide-to=index)
+                    .carousel-inner
+                        each image, index in property.images
+                            .carousel-item(class=(index == 0 ? "active": ""))
+                                img.d-block.w-100(src=image.url, alt='First slide')
+                    a.carousel-control-prev(href='#carouselExampleIndicators', role='button', data-slide='prev')
+                        span.carousel-control-prev-icon(aria-hidden='true')
+                        span.sr-only Previous
+                    a.carousel-control-next(href='#carouselExampleIndicators', role='button', data-slide='next')
+                        span.carousel-control-next-icon(aria-hidden='true')
+                        span.sr-only Next
+            .col
+                table.table
+                    tbody
+                        tr
+                            th Kaina
+                            td=`${property.price} EUR.`
+                        tr
+                            th Busto tipas
+                            td=property.propertyType
+                        if property.roomcount
+                            tr
+                                th Kambariu skaicius
+                                td=property.roomcount
+                        if property.bedcount
+                            tr
+                                th Lovu skaicius
+                                td=property.bedcount
+                button.btn.btn-success Užimtumas
+        #descriptionRow.row
+            .col
+                p=property.description
+        #contactRow.row
+            .col
+                .card(style='width: 18rem;')
+                    ul.list-group.list-group-flush
+                        li.list-group-item
+                            i.fas.fa-user-alt
+                            span=` ${property.user.firstname} ${property.user.lastname}`
+                        li.list-group-item
+                            i.fas.fa-phone
+                            span=` ${property.user.phone}`
+                        li.list-group-item
+                            i.far.fa-sticky-note
+                            span=` ${property.user.email}`
+            .col
+                form
+                    .form-group
+                        label(for='name') Vardas
+                        input#name.form-control(type='text', aria-describedby='nameHelp', placeholder='Vardas')
+                        small#nameHelp.form-text.text-muted Būtinas laukas
+                    .form-group
+                        label(for='email') El. pastas
+                        input#email.form-control(type='email', aria-describedby='emailHelp', placeholder='pavyzdys@pavyzdys.lt')
+                        small#emailHelp.form-text.text-muted Būtinas laukas
+                    .form-group
+                        label(for='phone') Telefono numeris
+                        input#phone.form-control(type='text', placeholder='+370XXXXXXXX')
+                    .form-group
+                        label(for='message') Žinutė
+                        input#message.form-control(type='textarea', aria-describedby='messageHelp')
+                        small#messageHelp.form-text.text-muted Būtinas laukas
+                    button.btn.btn-success(type="submit") Siųsti
+        #locationRow.row
+            #locationMap
+    
