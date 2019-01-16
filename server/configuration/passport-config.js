@@ -17,8 +17,10 @@ module.exports = (passport, User) => {
                 email: email
             }
         }).then(user => {
-            if(user)
-                return done(null, false, {message: "Email already taken!"});
+            if(user){
+                if(user.email !== null)
+                    return done(null, false, {message: "Email already taken!"});
+            }
             var hashedPassword = generateHashedPassword(password);
 
             var userToPush = {

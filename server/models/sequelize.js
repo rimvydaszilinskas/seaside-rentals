@@ -12,14 +12,15 @@ module.exports = (env) => {
 
   // initialize empty object
   let models = {};
+  models.relations = {};
 
   // create object models
   const User = UserModel(sequelize, Sequelize);
   const Property = PropertyModel(sequelize, Sequelize);
   const Image = ImageModel(sequelize, Sequelize);
 
-  Property.belongsTo(User, {foreignKey: {allowNull: false},  onDelete: 'CASCADE'});
-  Property.hasMany(Image, {onDelete: "CASCADE"});
+  const PropertyUser = Property.belongsTo(User, {foreignKey: {allowNull: true}, as: "user",  onDelete: 'CASCADE'});
+  const ImageProperty = Property.hasMany(Image, {onDelete: "CASCADE"});
 
   sequelize.sync({force: true})
     .then(() => {
@@ -29,6 +30,8 @@ module.exports = (env) => {
   models.User = User;
   models.Property = Property;
   models.Image = Image;
+  models.relations.PropertyUser = PropertyUser;
+  models.relations.ImageProperty = ImageProperty;
 
   return models;
 }

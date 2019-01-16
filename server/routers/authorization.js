@@ -8,8 +8,13 @@ function isLoggedIn(req, res, next) {
 
 module.exports = (config, passport) => {
     router.get("/login", (req, res) => {
-        // return a login view
-        res.render("login");
+        var param = req.query;
+        if(!req.isAuthenticated()) {
+            // return a login view
+            res.render("login", {param: param});
+        } else {
+            res.redirect("/");
+        }
     });
 
     router.post("/login", passport.authenticate('local-login', {
@@ -29,10 +34,11 @@ module.exports = (config, passport) => {
 
     router.get("/logout", (req, res) => {
         req.session.destroy();
-        res.send("logged out");
+        res.redirect("/auth/login");
     });
 
     router.get("/testaccess", isLoggedIn, (req, res) => {
+        console.log(req.user)
         res.send("authenticated");
     });
 

@@ -11,6 +11,7 @@ const configs = require("./config")[app.get("env")];
 
 // Get database objects
 const models = require("./models/sequelize.js")(app.get("env"));
+configs.models = models;
 
 // set up body parser
 app.use(bodyParser.json());

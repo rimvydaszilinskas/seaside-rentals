@@ -21,7 +21,7 @@ module.exports = (sequelize, Sequelize) => {
         propertyType: {
             type: Sequelize.STRING,
             unique: false,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 isIn: [["kambarys", "butas", "namas"]]
             }
