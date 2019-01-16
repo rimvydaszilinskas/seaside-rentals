@@ -27,7 +27,7 @@ configs.models = models;
 
 // set up body parser
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 
 // set up view engine
 app.set("view engine", "pug");

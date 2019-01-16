@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const Op = require("sequelize").Op;
 
 module.exports = (config) => {
     let Property = config.models.Property;
@@ -145,6 +146,83 @@ module.exports = (config) => {
             console.log(err);
             res.send("Error");
         });
+    });
+
+    router.get("/search", (req, res) => {
+        // gets the data types of type, location, room, bed, price
+        // prepare filters for type and location
+        // default select all operators will be marked as *
+        var propertyTypeFilter;
+        var locationFilter;
+
+        // set location filters
+        if(req.query.location) {
+            if(req.query.location !== "*"){
+                locationFilter = {
+                    [Op.eq]: req.query.location
+                };
+            } else {
+                locationFilter = {
+                    [Op.not]: null
+                };
+            }
+        }
+
+        // set location type filters
+        if(req.query.type) {
+            if(req.query.type !== "*"){
+                propertyTypeFilter = {
+                    [Op.eq]: req.query.type
+                };
+            } else {
+                propertyTypeFilter = {
+                    [Op.not]: null
+                };
+            }
+        }
+
+        Property.findAll({
+            where: {
+                $and: [
+                    {
+                        $or: [
+                            {
+                                price: {
+                                    [Op.lte] : req.query.price
+                                },
+                            },
+                            {
+                                price: {
+                                    [Op.eq] : null
+                                }
+                            }
+        
+                        ],
+                    },
+                    {
+                        $or: [
+                            {
+                                bedCount: {
+                                    [Op.gte] : req.query.beds
+                                },
+                            },
+                            {
+                                bedCount: {
+                                    [Op.eq] : null
+                                }
+                            }
+                        ]
+                    }
+                ],
+                propertyType: propertyTypeFilter,
+                city: locationFilter
+            }, include: [{model: User, as: "user"}, {model: Image, as: "images"}]
+        }).then((result) => {
+            res.json(result);
+        }).catch((err) => {
+            res.json({err: err});
+        });
+
     });
 
     return router;

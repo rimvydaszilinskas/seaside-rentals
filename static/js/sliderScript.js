@@ -19,3 +19,31 @@ priceSlider.oninput = function() {
 roomSlider.oninput = function() {
   roomOutput.innerHTML = this.value;
 }
+
+$(".filter").on("change", () => {
+  // collect all the filters
+  var filters = {};
+  if($("#type").val() !== "*"){
+    filters.type = $("#type").val();
+  }
+  if($("#location").val() !== "*"){
+    filters.location = $("#location").val();
+  }
+  filters.rooms = $("#minimumRoom").val();
+  filters.price = $("#priceRange").val();
+  filters.beds = $("#minimumBeds").val();
+
+  // send a request
+  $.ajax({
+    url: "/api/filter/count",
+    method: "POST",
+    data: filters,
+    success: (response) => {
+      console.log(response);
+      $("#resultCount").html(`${response})`);
+    },
+    error: (err) => {
+      console.log(err);
+    }
+  })
+});
