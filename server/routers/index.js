@@ -6,9 +6,11 @@ const admin = require("./admin");
 
 module.exports = (config, passport) => {
     var {getLatestProperties} = require("../services/PropertyServices")(config);
+    var {getLatestInformation} = require("../services/InformationServices")(config);
 
     router.get("/", (req, res) => {
-        getLatestProperties()
+        getLatestInformation().then(information => {
+            getLatestProperties()
             .then(response => {
                 res.render("index", {
                     hasMap: true,
@@ -16,11 +18,13 @@ module.exports = (config, passport) => {
                     activeUser: req.user,
                     homeSearch: true,
                     properties: response,
-                    user: req.user
+                    user: req.user,
+                    information: information
                 });
             }).catch(err => {
                 res.send(err);
             });
+        });
     });
     
     router.use("/auth", authorization(config, passport));

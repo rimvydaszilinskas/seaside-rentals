@@ -77,21 +77,10 @@ block mainContent
     h3 Vieta jūsų reklamai
   .container.marginTop.infoNews
     .row
-      .col-md-3
-        h5 Title
-        p
-          | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorpe.
-      .col-md-3
-        h5 Title
-        p
-          | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorpe.
-      .col-md-3
-        h5 Title
-        p
-          | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorpe.
-      .col-md-3
-        h5 Title
-        p
-          | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorpe.
+      if information
+        each info in information
+          .col-md-3
+            h5=info.title
+            p=info.body
 
 

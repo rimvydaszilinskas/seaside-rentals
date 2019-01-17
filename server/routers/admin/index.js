@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const infoRoute = require("./info");
 
 function isAdmin(req, res, next) {
     return next();
@@ -84,6 +85,9 @@ module.exports = (config) => {
         });
         
     });
+
+    config.isAdmin = isAdmin;
+    router.use("/info", infoRoute(config));
 
     return router;
 };

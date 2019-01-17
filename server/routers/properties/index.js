@@ -9,7 +9,7 @@ module.exports = (config) => {
     
     // directs to the search
     router.get("/", (req, res) => {
-        res.render("search", {search: true});
+        res.render("search", {search: true, activeUser: req.user});
     });
 
     // returns appropriate view for the create request
@@ -17,13 +17,13 @@ module.exports = (config) => {
         if(!req.isAuthenticated())
             res.render("properties/index");
         else 
-            res.render("properties/create", {user: req.user});
+            res.render("properties/create", {activeUser: req.user});
     });
 
     // returns anonymous create view
     router.get("/create/anonymous", (req, res) => {
         if(req.isAuthenticated)
-            return res.render("properties/create", {user: req.user});
+            return res.render("properties/create", {activeUser: req.user});
         return res.render("properties/create");
     });
 
@@ -31,7 +31,7 @@ module.exports = (config) => {
     router.post("/create", (req, res) => {
         createProperty(req)
             .then(response => {
-                return res.render("properties/upload", {property: response});
+                return res.render("properties/upload", {property: response, activeUser: req.user});
             }).catch(err => {
                 console.log(err);
                 res.json({err: err});
@@ -46,7 +46,7 @@ module.exports = (config) => {
             id: 1
         };
 
-        res.render("properties/upload", {property: property});
+        res.render("properties/upload", {property: property, activeUser: req.user});
     });
 
     // handles the uplaod request
@@ -88,7 +88,8 @@ module.exports = (config) => {
                 results: result, 
                 search: true, 
                 filters: filters, 
-                resultSearch: true
+                resultSearch: true,
+                activeUser: req.user
             });
         }).catch(err => {
             return res.send(err);
@@ -96,7 +97,7 @@ module.exports = (config) => {
     });
 
     router.get("/results", (req, res) => {
-        res.render("properties/results");
+        res.render("properties/results", {activeUser: req.user});
     });
     return router;
 };

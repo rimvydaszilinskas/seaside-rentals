@@ -1,0 +1,31 @@
+extends ../layout/layout
+block mainContent
+    .container
+        .row
+            if informations
+                .col-md-12
+                    table.table
+                        thead
+                            tr
+                                th(scope='col') ID
+                                th(scope='col') Title
+                                th(scope='col') Body
+                                th(scope='col') Actions
+                            tbody
+                                each info in informations
+                                    tr
+                                        td(scope='row')=info.id
+                                        td=info.title
+                                        td=info.body
+                                        td
+                                            a.btn.btn-success(href=`/admin/info/edit/${info.id}`) Edit
+                                            button.btn.btn-danger.delete-info(id=`delete-${info.id}`) Delete
+                    .row
+                        .col-md-12(style='text-align:center')
+                            a.btn.btn-success(href='/admin/info/create') Create new
+            else
+                .col-md-12(style='text-align:center')
+                    h2 No information! 
+                    a.btn.btn-success(href='/admin/info/create') Create one now!
+
+        

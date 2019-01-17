@@ -1,0 +1,13 @@
+extends ../layout/layout
+block mainContent
+    .container
+        .row
+            .col-md-8.offset-md-2
+                form(method="POST", action="/admin/info/create")
+                    .form-group
+                        label(for='title') Title
+                        input.form-control#title(name='title', type='text')
+                    .form-group
+                        label(for='body') Body
+                        textarea.form-control#title(name='body')
+                    button.btn.btn-success(type='submit') Submit

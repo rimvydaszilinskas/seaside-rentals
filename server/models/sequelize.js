@@ -3,6 +3,7 @@ const Sequelize = require("sequelize");
 const UserModel = require("./User");
 const PropertyModel = require("./Property");
 const ImageModel = require("./Image");
+const InformationModel = require("./Information");
 
 module.exports = (env, sync) => {
   const config = require("../config/mysql_config")[env];
@@ -18,6 +19,7 @@ module.exports = (env, sync) => {
   const User = UserModel(sequelize, Sequelize);
   const Property = PropertyModel(sequelize, Sequelize);
   const Image = ImageModel(sequelize, Sequelize);
+  const Information = InformationModel(sequelize, Sequelize);
 
   const PropertyUser = Property.belongsTo(User, {foreignKey: {allowNull: true}, as: "user",  onDelete: 'CASCADE'});
   const ImageProperty = Property.hasMany(Image, {onDelete: "CASCADE"});
@@ -33,6 +35,7 @@ module.exports = (env, sync) => {
   models.Image = Image;
   models.relations.PropertyUser = PropertyUser;
   models.relations.ImageProperty = ImageProperty;
+  models.Information = Information;
 
   return models;
 }

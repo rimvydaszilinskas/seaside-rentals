@@ -97,3 +97,56 @@ $(".update-btn-user").on("click", (event) => {
         }
     })
 });
+
+$(".delete-info").on("click", (event) => {
+    var id = event.target.id.split("-")[1];
+    var answer = confirm(`Are you sure you want to delete ${id}?`);
+
+    if(answer){
+        $.ajax({
+            url: "/admin/info/delete",
+            method: "POST",
+            data: {
+                id: id
+            },
+            success: (response) => {
+                console.log(response);
+                if(response.error) {
+                    alert("An error occured");
+                } else {
+                    $(event.target).parent().parent().hide();
+                } 
+            },
+            error: (err) => {
+                alert("Cannot delete");
+            }
+        })
+    }
+});
+
+$(".update-btn-info").on("click", (event) => {
+    var inputField = $($(event.target).parent()).siblings()[0];
+    var name = $(inputField).attr("name");
+    var value = $(inputField).val();
+    var id = $("#id").val();
+    var obj = {};
+    obj[name] = value;
+
+    $.ajax({
+        url: "/admin/info/update",
+        method: "POST",
+        data: {
+            id: id,
+            query: obj
+        },
+        success: (response) => {
+            if(response.error)
+                alert("error occured");
+            else 
+                alert("Updated");
+        },
+        error: (error) => {
+            alert(error);
+        }
+    })
+});
