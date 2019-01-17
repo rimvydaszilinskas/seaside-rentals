@@ -7,6 +7,7 @@ var bedOutput = document.getElementById("minBeds");
 
 priceOutput.innerHTML = priceSlider.value;
 roomOutput.innerHTML = roomSlider.value;
+bedOutput.innerHTML = bedSlider.value;
 
 bedSlider.oninput = function() {
   bedOutput.innerHTML = this.value;
@@ -40,7 +41,7 @@ $(".filter").on("change", () => {
     data: filters,
     success: (response) => {
       console.log(response);
-      $("#resultCount").html(`${response})`);
+      $("#resultCount").html(` (${response})`);
     },
     error: (err) => {
       console.log(err);

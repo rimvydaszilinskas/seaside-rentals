@@ -205,6 +205,12 @@ footer {
   margin: 5px;
 }
 
+.middle-button {
+  width: 100%;
+  text-align: center;
+  padding-top: 15px;
+}
+
 @media (max-width: 801px) {
   #mapRow {
     display: none;

@@ -74,8 +74,22 @@ module.exports = (config) => {
     });
 
     router.get("/search", (req, res) => {
+        var filters = {};
+        filters.beds = req.query.beds;
+        filters.rooms = req.query.rooms;
+        filters.price = req.query.price;
+        if(req.query.location !== "*")
+            filters.location = req.query.location;
+        if(req.query.type !== "*")
+            filters.type = req.query.type;
         filterAllAndCountGet(req).then(result=> {
-            return res.json(result);
+            // return res.json(result);
+            return res.render("properties/results", {
+                results: result, 
+                search: true, 
+                filters: filters, 
+                resultSearch: true
+            });
         }).catch(err => {
             return res.send(err);
         });

@@ -3,120 +3,78 @@ block mainContent
     .container.marginTop
         .row
             .col-md-3.searchEdit
-            .container-fluid
-                .row
-                .col
-                    label(for='priceRange')
-                    | Kaina iki 
-                    span#maxPrice
-                    |  EUR. per parą
-                    input#priceRange.slider(type='range', min='50', max='500', value='150', step='10')
-                .row
-                .col
-                    label(for='minimumCapacity')
-                    | Vietų skaičius >
-                    span#minCapacity
-                    input#minimumCapacity.slider(type='range', min='1', max='10', value='3')
-                .row
-                .col
-                    label(for='minimumBeds')
-                    | Lovu skaičius >
-                    span#minBeds
-                    input#minimumBeds.slider(type='range', min='1', max='10', value='2')
-                .row
-                .col
-                    .form-group
-                    label(for='arrivalDate') Atvykimo data
-                    input#arrivalDate.form-control.form-control-sm(type='date')
-                .row
-                .col
-                    .form-group
-                    label(for='departureDate') Išvkimo data
-                    input#departureDate.form-control.form-control-sm(type='date')
-                .row
-                .col
-                    .form-group.form-check
-                    input#airCon.form-check-input(type='checkbox')
-                    label.form-check-label(for='airCon') Kondicionierius
-                    .form-group.form-check
-                    input#kitchen.form-check-input(type='checkbox')
-                    label.form-check-label(for='kitchen') Nuosava virtuve
-                    .form-group.form-check
-                    input#dishwasher.form-check-input(type='checkbox')
-                    label.form-check-label(for='dishwasher') Indaplove
-                    .form-group.form-check
-                    input#washingMachine.form-check-input(type='checkbox')
-                    label.form-check-label(for='washingMachine') Skalbimo mašina
-                    .form-group.form-check
-                    input#wifi.form-check-input(type='checkbox')
-                    label.form-check-label(for='wifi') Bevielis internetas
-                    .form-group.form-check
-                    input#tv.form-check-input(type='checkbox')
-                    label.form-check-label(for='tv') Televizija
-                    .form-group.form-check
-                    input#parking.form-check-input(type='checkbox')
-                    label.form-check-label(for='parking') Nemokamas parkavimas
-                    .form-group.form-check
-                    input#bedsheets.form-check-input(type='checkbox')
-                    label.form-check-label(for='bedsheets') Patalynė
-                .row
-                .col
-                    button.btn.btn-success Ieškoti
-                    button.btn.btn-neutral Papildyti paieska
+                .container-fluid
+                    .row
+                        .col
+                            label(for='type') Busto tipas
+                            select#type.form-control(name='type')
+                                if(filters.type)
+                                    option(value=filters.type)=`${filters.type.charAt(0).toUpperCase()}${filters.type.slice(1)}`
+                                option(value='*') 
+                                option(value='butas') Butas
+                                option(value='namas') Namas
+                                option(value='kambarys') Kambarys
+                    .row
+                        .col
+                            label(for="location") Vietove
+                            select#location.form-control(name='location')
+                                if(filters.location)
+                                    option(value=filters.location)=`${filters.location.charAt(0).toUpperCase()}${filters.location.slice(1)}`
+                                option(value='*') Visos vietoves
+                                option(value='Nida') Nida
+                                option(value='Juodkrante') Juodkrante
+                                option(value='Klaipeda') Klaipeda
+                                option(value='Palanga') Palanga
+                                option(value='Sventoji') Sventoji
+                    .row
+                        .col
+                            label(for='priceRange')
+                            | Kaina iki 
+                            span#maxPrice
+                            |  EUR. per parą
+                            input#priceRange.slider(type='range', min='50', max='500', value=`${filters.price ? filters.price : 2}`, step='10', name='price')
+                    .row
+                        .col
+                            label(for='minimumCapacity')
+                            | Kamabarių skaičius >
+                            span#minRoom
+                            input#minimumRoom.slider(type='range', min='1', max='10', value=`${filters.rooms ? filters.rooms : 1}`, name='rooms')
+                    .row
+                        .col
+                            label(for='minimumBeds')
+                            | Lovu skaičius >
+                            span#minBeds
+                            input#minimumBeds.slider(type='range', min='1', max='10', value=`${filters.beds ? filters.beds : 1}`, name='beds')
+                    .row
+                        .col
+                            button.btn.btn-success#updateSearch Ieškoti
+                            a(href='/properties/')  Papildyti paieska
             .col-md-7
-            .container.resultsSet
-                .row.bottomBorder
-                h4 Rasta 10 rezultatu Palangoje
-                .row.resultRow
-                .card.flex-row.flex-wrap
-                    .card-header.border-0
-                    img(src='property.jpg', alt='')
-                    .card-block.px-2
-                    h4.card-title Bybių alėja 69
-                    p.card-text Lorem Ipsum
-                    a.btn.btn-primary(href='#') Peržiūrėti
-                    .w-100
-                    .card-footer.w-100.text-muted
-                    | Paskelbta 2018 rugsėjo 1
-                .card.flex-row.flex-wrap
-                    .card-header.border-0
-                    img(src='property.jpg', alt='')
-                    .card-block.px-2
-                    h4.card-title Bybių alėja 69
-                    p.card-text Lorem Ipsum
-                    a.btn.btn-primary(href='#') Peržiūrėti
-                    .w-100
-                    .card-footer.w-100.text-muted
-                    | Paskelbta 2018 rugsėjo 1
-                .card.flex-row.flex-wrap
-                    .card-header.border-0
-                    img(src='property.jpg', alt='')
-                    .card-block.px-2
-                    h4.card-title Bybių alėja 69
-                    p.card-text Lorem Ipsum
-                    a.btn.btn-primary(href='#') Peržiūrėti
-                    .w-100
-                    .card-footer.w-100.text-muted
-                    | Paskelbta 2018 rugsėjo 1
-                .row.marginTop
-                ul.pagination
-                    li.page-item.disabled
-                    a.page-link(href='#', tabindex='-1') Previous
-                    li.page-item.active
-                    a.page-link(href='#') 1
-                    li.page-item
-                    a.page-link(href='#')
-                        | 2 
-                        span.sr-only (current)
-                    li.page-item
-                    a.page-link(href='#') 3
-                    li.page-item
-                    a.page-link(href='#') Next
+                .container.resultsSet
+                    .row.bottomBorder
+                        h4=`Rasta ${results.count} rezultatu`
+                    .row.resultRow
+                        if(results.count!=0)
+                            each property in results.rows
+                                .card.flex-row.flex-wrap(style="width:100%")
+                                    .card-header.border-0
+                                        img(src=property.images[0].url, alt='')
+                                    .card-block.px-2
+                                        h4.card-title=property.address
+                                        p.card-text=property.city
+                                        a.btn.btn-primary(href=`/properties/get/${property.id}`) Peržiūrėti
+                                    .w-100
+                                    .card-footer.w-100.text-muted=`Paskelba ${property.getDate(property.createdAt)}`
+                            .middle-button
+                                button.btn.btn-success#loadMore Load more
+                        else
+                            .display
+                                h5 Nera rezultatu pagal uzklausa
             .col-md-2.advertisementAtSearch
-            .row
-                .col
-                .container.advertisement
-                    h5 Reklama
-                .col.marginTop
-                .container.advertisement
-                    h5 Reklama
+                .row
+                    .col
+                        .container.advertisement
+                            h5 Reklama
+                    .col.marginTop
+                        .container.advertisement
+                            h5 Reklama

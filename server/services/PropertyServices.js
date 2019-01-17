@@ -116,7 +116,13 @@ module.exports = (config) => {
                     ],
                     propertyType: propertyTypeFilter,
                     city: locationFilter
-                }, include: [{model: User, as: "user"}, {model: Image, as: "images"}]
+                }, include: [
+                    {model: User, as: "user"},
+                    {model: Image, as: "images"}
+                ],
+                order: [
+                    ['id', 'desc']
+                ]
             }).then((result) => {
                 resolve(result);
             }).catch((err) => {
@@ -184,7 +190,10 @@ module.exports = (config) => {
                     
                     propertyType: propertyTypeFilter,
                     city: locationFilter
-                }
+                },
+                order: [
+                    ['id', 'desc']
+                ]
             }).then((result) => {
                 resolve(result);
             }).catch((err) => {
@@ -208,5 +217,29 @@ module.exports = (config) => {
         });
     }
 
-    return {filterAllAndCountPost, filterAllAndCountGet, createProperty, getProperty};
+    function getLaterThan(req) {
+        return new Promise(resolve => {
+            filterAllAndCountPost(req)
+                .then(results => {
+                    var properties = results.rows;
+                    var lastPropertyId = req.body.lastPropertyId;
+                    var response = {};
+                    response.count = 0
+                    response.properties = [];
+
+                    properties.forEach(element => {
+                        if(element.id < lastPropertyId) {
+                            response.properties.push(element);
+                            response.count += 1;
+                        }
+                    });
+
+                    resolve(response);
+                }).catch(err => {
+                    throw err;
+                });
+        });
+    }
+
+    return {filterAllAndCountPost, filterAllAndCountGet, createProperty, getProperty, getLaterThan};
 }
