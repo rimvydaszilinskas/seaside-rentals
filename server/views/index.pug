@@ -5,85 +5,74 @@ block mainContent
       #map
       #searchOnMap
         .container
-          form#searchOnMapForm
+          form#searchOnMapForm(method='GET', action='/properties/search')
             .form-row
               .col
-                label(for='typeSelect') Būsto tipas
-                select#typeSelect.form-control.form-control-sm
-                  option Butas
-                  option Kambarys
-                  option Namas
+                label(for='type') Būsto tipas
+                select#type.form-control.form-control-sm(name="type")
+                  option(value="*")
+                  option(value="butas") Butas
+                  option(value="kambarys") Kambarys
+                  option(value="namas") Namas
               .col
-                label(for='locationSelect') Vieta
-                select#typeSelect.form-control.form-control-sm
-                  option
-                  option Palanga
-                  option Sventoji
+                label(for='location') Vieta
+                select#location.form-control.form-control-sm(name="location")
+                  option(value="*")
+                  option(value="palanga") Palanga
+                  option(value="sventoji") Sventoji
             .form-group.sliderContainer
-              label(for='priceRange')
+              label(for='price')
                 | Kaina iki: 
-                span#maxPrice 150
+                span#maxPrice 500
                 |  EUR.
-              input#priceRange.slider(type='range', min='50', max='500', value='150', step='10')
+              input#price.slider(type='range', min='50', max='500', value='500', step='10', name="price")
             .form-group.sliderContainer
-              label(for='minimumCapacity')
+              label(for='beds')
                 | Lovų skaičius >
-                span#minBeds 3
-              input#minimumBeds.slider(type='range', min='1', max='10', value='3')
-            button.btn.btn-success Ieškoti
+                span#minBeds 1
+              input#beds.slider(type='range', min='1', max='10', value='1', name="beds")
+            button.btn.btn-success(type="submit") Ieškoti
             a(href='/properties/') Išplėstinė paieška
-  .container.marginTop.latestContainer
-    .row
-      .col-md-12.rowTitle
-        h3 Populiariausi
-    .row.cardHolder
-      .card(style='width: 18rem;')
-        img.card-img-top(src='/images/property.jpg', alt='Property image')
-        .card-body
-          h5.card-title Nemuno g. 5
-          p Kambarys, nuosava virtuve, dusas
-          a.btn.btn-success(href='#') Apžiūrėti
-      .card(style='width: 18rem;')
-        img.card-img-top(src='/images/property.jpg', alt='Property image')
-        .card-body
-          h5.card-title Nemuno g. 5
-          p Kambarys, nuosava virtuve, dusas
-          a.btn.btn-success(href='#') Apžiūrėti
-      .card(style='width: 18rem;')
-        img.card-img-top(src='/images/property.jpg', alt='Property image')
-        .card-body
-          h5.card-title Nemuno g. 5
-          p Kambarys, nuosava virtuve, dusas
-          a.btn.btn-success(href='#') Apžiūrėti
+  //- .container.marginTop.latestContainer
+  //-   .row
+  //-     .col-md-12.rowTitle
+  //-       h3 Populiariausi
+  //-   .row.cardHolder
+  //-     .card(style='width: 18rem;')
+  //-       img.card-img-top(src='/images/property.jpg', alt='Property image')
+  //-       .card-body
+  //-         h5.card-title Nemuno g. 5
+  //-         p Kambarys, nuosava virtuve, dusas
+  //-         a.btn.btn-success(href='#') Apžiūrėti
+  //-     .card(style='width: 18rem;')
+  //-       img.card-img-top(src='/images/property.jpg', alt='Property image')
+  //-       .card-body
+  //-         h5.card-title Nemuno g. 5
+  //-         p Kambarys, nuosava virtuve, dusas
+  //-         a.btn.btn-success(href='#') Apžiūrėti
+  //-     .card(style='width: 18rem;')
+  //-       img.card-img-top(src='/images/property.jpg', alt='Property image')
+  //-       .card-body
+  //-         h5.card-title Nemuno g. 5
+  //-         p Kambarys, nuosava virtuve, dusas
+  //-         a.btn.btn-success(href='#') Apžiūrėti
   .container.marginTop.latestContainer
     .row
       .col-md-12.rowTitle
         h3 Naujausi skelbimai
-    .row.cardHolder
-      .card(style='width: 18rem;')
-        img.card-img-top(src='/images/property.jpg', alt='Property image')
-        .card-body
-          h5.card-title Nemuno g. 5
-          p Kambarys, nuosava virtuve, dusas
-          a.btn.btn-success(href='#') Apžiūrėti
-      .card(style='width: 18rem;')
-        img.card-img-top(src='/images/property.jpg', alt='Property image')
-        .card-body
-          h5.card-title Nemuno g. 5
-          p Kambarys, nuosava virtuve, dusas
-          a.btn.btn-success(href='#') Apžiūrėti
-      .card(style='width: 18rem;')
-        img.card-img-top(src='/images/property.jpg', alt='Property image')
-        .card-body
-          h5.card-title Nemuno g. 5
-          p Kambarys, nuosava virtuve, dusas
-          a.btn.btn-success(href='#') Apžiūrėti
-      .card(style='width: 18rem;')
-        img.card-img-top(src='/images/property.jpg', alt='Property image')
-        .card-body
-          h5.card-title Nemuno g. 5
-          p Kambarys, nuosava virtuve, dusas
-          a.btn.btn-success(href='#') Apžiūrėti
+    if(properties.length != 0)
+      .row.cardHolder
+        each property in properties
+          .card(style='width: 18rem;')
+            img.card-img-top(src=(property.images[0] ? property.images[0].url : '/images/property.jpg'), alt='Property image')
+            .card-body
+              h5.card-title=property.address
+              p=`${property.propertyType} | ${property.price} EUR.`
+              a.btn.btn-success(href=`/properties/get/${property.id}`) Apžiūrėti
+    else
+      .row
+        .col-md-6.offset-md-3(style="text-align:center")
+          h2 Nera skelbimu
   .container-fluid.mainAdHolder.marginTop
     h3 Vieta jūsų reklamai
   .container.marginTop.infoNews

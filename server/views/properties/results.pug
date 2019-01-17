@@ -58,7 +58,7 @@ block mainContent
                             each property in results.rows
                                 .card.flex-row.flex-wrap(style="width:100%")
                                     .card-header.border-0
-                                        img(src=property.images[0].url, alt='')
+                                        img(src=(property.images.length==0 ? '/images/property.jpg' : property.images[0].url), alt='')
                                     .card-block.px-2
                                         h4.card-title=property.address
                                         p.card-text=property.city

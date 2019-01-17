@@ -1,6 +1,6 @@
 module.exports = (config) => {
     let cloudinary = config.cloudinary;
-    let image = config.models.Image;
+    let Image = config.models.Image;
 
     function CloudinaryUpload(req) {
         // get all the image keys

@@ -1,0 +1,22 @@
+extends layout/layout
+block mainContent   
+    .container
+        .row
+            .col-md-12
+                table.table
+                    thead
+                        tr
+                            th(scope='col') ID
+                            th(scope='col') Address
+                            th(scope='col') Price
+                            th(scope='col') Actions
+                    tbody
+                        each property in properties
+                            tr
+                                th(scope='row')=property.id
+                                td=`${property.address}, ${property.city}`
+                                td=property.price
+                                td
+                                    a.btn.btn-success(href=`/admin/property/edit/${property.id}`) Edit
+                                    button.btn.btn-danger.delete(id=`delete-${property.id}`) Delete
+

@@ -1,0 +1,33 @@
+extends layout/layout
+block mainContent
+    .container
+        .row
+            .col-md-8.offset-md-2
+                form
+                    .form-group
+                        label(for='id') ID
+                        input.form-control#id(type='text', value=user.id, name='id', disabled='')
+                    .form-group
+                        label(for='firstname') First Name
+                        .input-group.mb-3
+                            input.form-control#firstname(type='text', value=user.firstname, name='firstname')
+                            .input-group-append
+                                button.btn.btn-outline-secondary.update-btn-user(type='button') Update
+                    .form-group
+                        label(for='lastname') Last Name
+                        .input-group.mb-3
+                            input.form-control#lastname(type='text', value=user.lastname, name='lastname')
+                            .input-group-append
+                                button.btn.btn-outline-secondary.update-btn-user(type='button') Update
+                    .form-group
+                        label(for='email') E-Mail
+                        .input-group.mb-3
+                            input.form-control#email(type='text', value=user.email, name='email')
+                            .input-group-append
+                                button.btn.btn-outline-secondary.update-btn-user(type='button') Update  
+                    .form-group
+                        label(for='phone') Phone
+                        .input-group.mb-3
+                            input.form-control#phone(type='text', value=user.phone, name='phone')
+                            .input-group-append
+                                button.btn.btn-outline-secondary.update-btn-user(type='button') Update                  

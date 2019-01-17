@@ -20,7 +20,6 @@ block mainContent
                     .form-group
                         label(for='propertyType') Busto tipas
                         select.form-control#propertyType(name='propertyType')
-                            option(value='*')
                             option(value='kambarys') Kambarys
                             option(value='butas') Butas
                             option(value='namas') Namas
@@ -39,6 +38,8 @@ block mainContent
                             input.form-control#renter(value=`${user.firstname} ${user.lastname}`, disabled='')
                             label(for='phone') Telefono numeris
                             input.form-control#phone(value=`${user.phone}` disabled='')
+                            label(for='email') El. paštas
+                            input.form-control#email(value=`${user.email}` disabled='')
                     else 
                         .form-group
                             label(for='firstname') Vardas

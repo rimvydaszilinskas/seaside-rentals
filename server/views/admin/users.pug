@@ -1,0 +1,22 @@
+extends layout/layout
+block mainContent
+    .container
+        .row
+            .col-md-12
+                table.table
+                    thead
+                        tr
+                            th(scope='col') ID
+                            th(scope='col') Name
+                            th(scope='col') Email
+                            th(scope='col') Actions
+                    tbody
+                        each user in users
+                            tr(class=`${user.password ? "" : "table-danger"}`)
+                                th(scope='row')=user.id
+                                td=`${user.firstname}, ${user.lastname}`
+                                td=user.email
+                                td
+                                    if user.password
+                                        a.btn.btn-success(href=`/admin/users/edit/${user.id}`) Edit
+                                    button.btn.btn-danger.delete-user(id=`delete-${user.id}`) Delete

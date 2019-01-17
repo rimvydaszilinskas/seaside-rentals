@@ -39,7 +39,7 @@ module.exports = (config, passport) => {
 
     router.get("/testaccess", isLoggedIn, (req, res) => {
         console.log(req.user)
-        res.send("authenticated");
+        res.redirect("/");
     });
 
     return router;

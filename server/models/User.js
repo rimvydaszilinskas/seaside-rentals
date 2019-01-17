@@ -28,6 +28,10 @@ module.exports = (sequelize, Sequelize) => {
         phone: {
             type: Sequelize.STRING,
             allowNull: true
+        },
+        admin: {
+            type: Sequelize.BOOLEAN,
+            allowNull: true
         }
     });
 };

@@ -22,9 +22,9 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             unique: false,
             allowNull: true,
-            validate: {
-                isIn: [["kambarys", "butas", "namas"]]
-            }
+            // validate: {
+            //     isIn: ["kambarys", "butas", "namas"]
+            // }
         },
         roomcount: {
             type: Sequelize.INTEGER,

@@ -31,7 +31,7 @@ module.exports = (config) => {
     router.post("/create", (req, res) => {
         createProperty(req)
             .then(response => {
-                return res.render("properties/upload", { property: resp});
+                return res.render("properties/upload", {property: response});
             }).catch(err => {
                 console.log(err);
                 res.json({err: err});
@@ -53,7 +53,7 @@ module.exports = (config) => {
     router.post("/upload", fileParser, (req, res) => {
         CloudinaryUpload(req)
             .then(response => {
-                res.json(response);
+                res.redirect(`/properties/get/${response[0].propertyId}`)
             }).catch(err => {
                 res.json({err: err});
             });

@@ -110,6 +110,11 @@ module.exports = (config) => {
                                     bedCount: {
                                         [Op.eq] : null
                                     }
+                                },
+                                {
+                                    bedCount: {
+                                        [Op.eq] : 0
+                                    }
                                 }
                             ]
                         }
@@ -241,5 +246,69 @@ module.exports = (config) => {
         });
     }
 
-    return {filterAllAndCountPost, filterAllAndCountGet, createProperty, getProperty, getLaterThan};
+    function getLatestProperties() {
+        return new Promise(resolve => {
+            Property.findAll({
+                order: [
+                    ['id', 'desc']
+                ],
+                limit: 6,
+                include : [
+                    {model: Image, as: "images"}
+                ]
+            }).then(result => {
+                resolve(result);
+            }).catch(err => {
+                throw err;
+            });
+        });
+        
+    }
+
+    function getAllProperties(){
+        return new Promise(resolve => {
+            Property.findAll()
+                .then(result => {
+                    resolve(result);
+                }).catch(err => {
+                    throw err;
+                });
+        });
+    }
+
+    function deleteProperty(id){
+        return new Promise(resolve => {
+            Property.destroy({
+                where: {
+                    id: id
+                }
+            }).then(result => {
+                resolve(result);
+            }).catch(err => {
+                throw err;
+            });
+        });
+    }
+
+    function updateProperty(id, query) {
+        return new Promise(resolve => {
+            Property.update(query, {where: {id: id}}).then(res => {
+                resolve(res);
+            }).catch(ex => {
+                throw ex;
+            });
+        });
+    }
+
+    return {
+        filterAllAndCountPost,
+        filterAllAndCountGet, 
+        createProperty, 
+        getProperty, 
+        getLaterThan, 
+        getLatestProperties, 
+        getAllProperties,
+        deleteProperty,
+        updateProperty
+    };
 }
